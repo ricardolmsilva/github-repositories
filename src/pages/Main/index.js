@@ -1,9 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { FaGithubAlt, FaPlus, FaSpinner, FaTrashAlt } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
+import {
+  FaGithubAlt,
+  FaPlus,
+  FaSpinner,
+  FaTrashAlt,
+  FaArrowCircleRight,
+} from 'react-icons/fa'
 
 import api from '../../services/api'
 
-import { Container, Form, SubmitButton, List } from './styles'
+import Container from '../../components/Container'
+import { Form, SubmitButton, List } from './styles'
 
 export default function Main() {
   const [search, setSearch] = useState()
@@ -76,10 +84,14 @@ export default function Main() {
       <List>
         {repositories.map((repository) => (
           <li key={repository.name}>
-            <a href={repository.url} target="_blank" rel="noopener noreferrer">
-              {repository.name}
-            </a>
-            <FaTrashAlt onClick={() => handleDelete(repository.name)} />
+            <span>
+              <FaTrashAlt onClick={() => handleDelete(repository.name)} />
+              <span>{repository.name}</span>
+            </span>
+
+            <Link to={`/repository/${encodeURIComponent(repository.name)}`}>
+              <FaArrowCircleRight />
+            </Link>
           </li>
         ))}
       </List>

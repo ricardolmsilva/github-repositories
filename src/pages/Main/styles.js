@@ -1,25 +1,6 @@
-import styled, { keyframes, css } from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.div`
-  max-width: 700px;
-  background: #fff;
-  border-radius: 4px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin: 80px auto;
-
-  h1 {
-    font-size: 20px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-
-    svg {
-      margin-right: 10px;
-      color: black;
-    }
-  }
-`
+import { rotate } from '../../styles/glogal'
 
 export const Form = styled.form`
   margin-top: 30px;
@@ -32,14 +13,6 @@ export const Form = styled.form`
     padding: 10px 15px;
     border-radius: 4px;
     font-size: 16px;
-  }
-`
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg)
-  }
-  to{
-    transform: rotate(360deg)
   }
 `
 
@@ -57,17 +30,16 @@ export const SubmitButton = styled.button.attrs((props) => ({
   justify-content: center;
   align-items: center;
 
-  &[disbled] {
+  &[disabled] {
     cursor: not-allowed;
   }
 
   svg {
     color: white;
-
     ${({ loading }) =>
       loading &&
       css`
-        animation: ${rotate} 2s linear infinite;
+        animation: ${rotate} 1s linear infinite;
       `}
   }
 `
@@ -78,6 +50,7 @@ export const List = styled.ul`
 
   li {
     padding: 15px 0;
+    margin: 0 15px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -86,19 +59,29 @@ export const List = styled.ul`
     & + li {
       border-top: 1px solid #eee;
     }
-
+    span,
     a {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
       color: black;
     }
 
     svg {
-      color: red;
-      opacity: 0.5;
+      font-size: 13px;
+
+      opacity: 0.7;
+      transition: opacity 0.3s;
 
       &:hover {
-        opacity: 0.8;
+        opacity: 1;
         cursor: pointer;
       }
+    }
+
+    span svg {
+      color: red;
+      margin-right: 10px;
     }
   }
 `
